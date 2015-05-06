@@ -7,7 +7,6 @@ import javax.swing.JOptionPane;
  * Profesor Jorge Páramo Fonseca
  * HCRadiologia
  * @author Glo System
- * @version 1.0
  * 
  * 
  * Esta clase tiene por fin manejar el mapeo de la tabla tb_epss
