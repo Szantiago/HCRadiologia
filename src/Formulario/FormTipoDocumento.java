@@ -6,18 +6,27 @@
 package Formulario;
 
 import HCRadiologia.TipoDocumento;
+import java.awt.Color;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Toshiba
  */
 public class FormTipoDocumento extends javax.swing.JFrame {
-
+TipoDocumento mitipDoc = new TipoDocumento();
     /**
      * Creates new form TipoDocumento
      */
     public FormTipoDocumento() {
         initComponents();
+        this.setLocation(300,120);
+        this.getContentPane().setBackground(new Color (0,212,78));
+        TipoDocumento[] miLista = mitipDoc.crudListaTipoDocumento();             
+        for(int intCont = 0; intCont < miLista.length; intCont++){
+        jComboDoc.addItem(miLista[intCont].getIntIdTipo()+ "-"+miLista[intCont].getStrCInicialesTipoDoc()+"-"+miLista[intCont].getstrTipDoc());
+        }
+        
     }
 
     /**
@@ -37,6 +46,9 @@ public class FormTipoDocumento extends javax.swing.JFrame {
         txtIniciales = new javax.swing.JTextField();
         txtTipDoc = new javax.swing.JTextField();
         btnClear = new javax.swing.JButton();
+        btnInsert = new javax.swing.JButton();
+        jComboDoc = new javax.swing.JComboBox();
+        btnActualizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tipo de Documento");
@@ -61,6 +73,26 @@ public class FormTipoDocumento extends javax.swing.JFrame {
             }
         });
 
+        btnInsert.setText("Insertar");
+        btnInsert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInsertActionPerformed(evt);
+            }
+        });
+
+        jComboDoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboDocActionPerformed(evt);
+            }
+        });
+
+        btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -69,33 +101,54 @@ public class FormTipoDocumento extends javax.swing.JFrame {
                 .addGap(68, 68, 68)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(17, 17, 17)
-                        .addComponent(btnBuscar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnClear))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3))
                         .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtTipDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtIniciales, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(52, Short.MAX_VALUE))
+                            .addComponent(txtIniciales, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboDoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addComponent(btnBuscar)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnClear))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(btnInsert)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnActualizar)))))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnClear)
-                    .addComponent(btnBuscar))
-                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jComboDoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(33, 33, 33))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnBuscar)
+                            .addComponent(btnClear))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnInsert)
+                            .addComponent(btnActualizar))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
@@ -106,17 +159,18 @@ public class FormTipoDocumento extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(txtTipDoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(40, 40, 40))
+                .addGap(29, 29, 29))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        TipoDocumento mitipDoc = new TipoDocumento();
+        
         mitipDoc.crudMostrarTipoDocumento(Integer.parseInt(txtBuscar.getText()));
         txtIniciales.setText(mitipDoc.getStrCInicialesTipoDoc());
         txtTipDoc.setText(mitipDoc.getstrTipDoc());
+        btnInsert.setEnabled(false); 
         
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -124,7 +178,41 @@ public class FormTipoDocumento extends javax.swing.JFrame {
        txtBuscar.setText("");
        txtIniciales.setText("");
        txtTipDoc.setText("");
+       jComboDoc.removeAllItems();
+        btnInsert.setEnabled(true);
+       btnBuscar.setEnabled(true);
+       TipoDocumento[] miLista = mitipDoc.crudListaTipoDocumento();             
+        for(int intCont = 0; intCont < miLista.length; intCont++){
+        jComboDoc.addItem(miLista[intCont].getIntIdTipo()+ "-"+miLista[intCont].getStrCInicialesTipoDoc()+"-"+miLista[intCont].getstrTipDoc());
+        }
     }//GEN-LAST:event_btnClearActionPerformed
+
+    private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
+       mitipDoc.crudCrearTipoDocumento(txtTipDoc.getText(),txtIniciales.getText());
+       txtBuscar.setText("");
+       txtIniciales.setText("");
+       txtTipDoc.setText("");
+       JOptionPane.showMessageDialog(null, "Se creo el registro", "Crecion de color",2);//Mensaje de exito (dato 2)
+       
+       btnBuscar.setEnabled(false); 
+
+    }//GEN-LAST:event_btnInsertActionPerformed
+
+    private void jComboDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboDocActionPerformed
+        TipoDocumento mD = new TipoDocumento();
+        TipoDocumento[] lD = mD.crudListaTipoDocumento();
+        mD=lD[jComboDoc.getSelectedIndex()];
+        int varId=mD.getIntIdTipo();
+        String varInD=mD.getStrCInicialesTipoDoc();
+        String varD = mD.getstrTipDoc();
+    }//GEN-LAST:event_jComboDocActionPerformed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        mitipDoc.crudActualizarTipoDocumento(Integer.parseInt(txtBuscar.getText()),txtTipDoc.getText(),txtIniciales.getText());
+        txtIniciales.setText(mitipDoc.getStrCInicialesTipoDoc());
+        txtTipDoc.setText(mitipDoc.getstrTipDoc());
+        
+    }//GEN-LAST:event_btnActualizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -163,8 +251,11 @@ public class FormTipoDocumento extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnClear;
+    private javax.swing.JButton btnInsert;
+    private javax.swing.JComboBox jComboDoc;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

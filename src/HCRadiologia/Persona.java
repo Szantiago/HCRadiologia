@@ -167,7 +167,7 @@ public class Persona {
 		intRH = newVal;
 	}
 
-	public byte getByteGenero(){
+	public int getByteGenero(){
             
 		return byteGenero;
 	}
@@ -353,6 +353,8 @@ public class Persona {
 	   }
             
 	}
+        
+        
 //==========================================================================================================================
 // Main para hacer pruebas 
 

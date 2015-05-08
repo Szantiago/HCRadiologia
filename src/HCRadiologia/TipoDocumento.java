@@ -26,7 +26,8 @@ public class TipoDocumento {
 	public TipoDocumento(){
 
 	}
-
+        
+        
 	public int getIntIdTipo(){
 		return intIdTipo;
 	}
@@ -56,8 +57,10 @@ public class TipoDocumento {
 	 * @param cStrTipoDoc
 	 * @param cIntIdTipo
 	 */
-	public TipoDocumento(String cStrTipoDoc, int cIntIdTipo){
-
+	public TipoDocumento( int cIntIdTipo, String cStrTipoDoc){
+	
+            intIdTipo=cIntIdTipo;
+            strInicialesDoc=cStrTipoDoc;
 	}
 
 	/**
@@ -84,11 +87,11 @@ public class TipoDocumento {
             conMiconexion = new Conectar();
 
             String [][]strReg = conMiconexion.resultadoQuery(conMiconexion.queryConsulta(
-                                    "SELECT `id_tipodocumento`, `tipo_documento`, `iniciales_tipodocumento` FROM `ct_tiposdocumentos` WHERE  id_tipodocumento = " + intCTipo +  ";")); 
+                                    "SELECT `id_tipodocumento`, `iniciales_tipodocumento`, `tipo_documento` FROM `ct_tiposdocumentos` WHERE  id_tipodocumento = " + intCTipo +  ";")); 
            
             intIdTipo = Integer.parseInt(strReg[0][0]);
-            strTipDoc = strReg[0][1];
-            strInicialesDoc = strReg[0][2];
+            strInicialesDoc = strReg[0][1];
+            strTipDoc = strReg[0][2];
             
 	}
 
@@ -107,6 +110,7 @@ public class TipoDocumento {
 	   {
                 conMiconexion.queryUpdate("UPDATE `ct_tiposdocumentos` SET  iniciales_tipodocumento = '" + strCinicialestipo + "', tipo_documento = '"+ strCTipo + "' WHERE  `id_tipodocumento` = " + intCTipo + ";");
                 
+               
                strInicialesDoc = strCinicialestipo;
                strTipDoc = strCTipo;
                String strMensaje = "Se modifico Tipo Documento con éxito";
@@ -123,7 +127,42 @@ public class TipoDocumento {
 	}
 
 	public TipoDocumento[] crudListaTipoDocumento(){
-		return null;
+            int intCont;
+            int intTama = 0;
+            conMiconexion = new Conectar();
+            
+            try
+            {
+                String [][]strReg = conMiconexion.resultadoQuery(conMiconexion.queryConsulta( 
+                                                "SELECT COUNT(`id_tipodocumento`) AS TAL FROM `ct_tiposdocumentos`;"));
+
+                intTama = Integer.parseInt(strReg[0][0]);
+                //System.out.print("\n el tamaño es:" + intTama + "\n");
+                
+                strReg = conMiconexion.resultadoQuery(conMiconexion.queryConsulta(
+                        "SELECT id_tipodocumento,iniciales_tipodocumento , tipo_documento FROM ct_tiposdocumentos ORDER BY id_tipodocumento;"));                
+
+                TipoDocumento [] Lista = new TipoDocumento[intTama];
+
+                for (intCont = 0; intCont <(intTama); intCont++)
+                {
+                    TipoDocumento TipAux = new TipoDocumento( Integer.parseInt(strReg[intCont][0]), 
+                            strReg[intCont][1]);
+                                        
+                    Lista[intCont] = TipAux;
+
+                }
+                return Lista;
+            }
+            catch(Exception ex)
+            {
+                String strMensaje = "Se presento un problema con la lista de Tipo Documento 1";
+                JOptionPane.showMessageDialog(null, strMensaje,  "PROBLEMA CON LA LISTA", 0);
+                System.out.print(ex);
+                return null;
+            }
+  
+		
 	}
 
 /**
@@ -161,7 +200,17 @@ public class TipoDocumento {
         miObjeto.crudCrearTipoDocumento("TI", "Tarjeta de identidad");
         System.out.print("\nEl nuevo Tipo Documentoes: " + miObjeto.getIntIdTipo() + " - " + miObjeto.getstrTipDoc() + " - " + miObjeto.getStrCInicialesTipoDoc() + "\n\n");
            */ 
-	}
-            
+	
+        
+        TipoDocumento[] lisTabla = miObjeto.crudListaTipoDocumento();
+        
+        System.out.print("\n\t\tLa lista de documentos es: \n" );
+        
+        //Bucle para listar los colores del vector
+        for(int intCont=0; intCont < lisTabla.length; intCont++)
+        {
+            System.out.print("\n" + lisTabla[intCont].getIntIdTipo()+" - "+lisTabla[intCont].getStrCInicialesTipoDoc());
+        }
+        }   
             
 }
