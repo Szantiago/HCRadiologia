@@ -57,10 +57,12 @@ public class TipoDocumento {
 	 * @param cStrTipoDoc
 	 * @param cIntIdTipo
 	 */
-	public TipoDocumento( int cIntIdTipo, String cStrTipoDoc){
+	public TipoDocumento( int cIntIdTipo, String cStrInicialesDoc, String cStrTipoDoc){
 	
             intIdTipo=cIntIdTipo;
-            strInicialesDoc=cStrTipoDoc;
+            strInicialesDoc=cStrInicialesDoc;
+            strTipDoc=cStrTipoDoc;
+            
 	}
 
 	/**
@@ -128,7 +130,7 @@ public class TipoDocumento {
 
 	public TipoDocumento[] crudListaTipoDocumento(){
             int intCont;
-            int intTama = 0;
+            int intTama =0;
             conMiconexion = new Conectar();
             
             try
@@ -137,7 +139,7 @@ public class TipoDocumento {
                                                 "SELECT COUNT(`id_tipodocumento`) AS TAL FROM `ct_tiposdocumentos`;"));
 
                 intTama = Integer.parseInt(strReg[0][0]);
-                //System.out.print("\n el tamaño es:" + intTama + "\n");
+                
                 
                 strReg = conMiconexion.resultadoQuery(conMiconexion.queryConsulta(
                         "SELECT id_tipodocumento,iniciales_tipodocumento , tipo_documento FROM ct_tiposdocumentos ORDER BY id_tipodocumento;"));                
@@ -147,12 +149,13 @@ public class TipoDocumento {
                 for (intCont = 0; intCont <(intTama); intCont++)
                 {
                     TipoDocumento TipAux = new TipoDocumento( Integer.parseInt(strReg[intCont][0]), 
-                            strReg[intCont][1]);
+                            strReg[intCont][1],strReg[intCont][2]);
                                         
                     Lista[intCont] = TipAux;
 
-                }
+                }//System.out.print("\n el tamaño es:" + intTama + "\n");
                 return Lista;
+                
             }
             catch(Exception ex)
             {

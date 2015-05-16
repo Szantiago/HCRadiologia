@@ -17,7 +17,9 @@ public class Eps {
 	private int intIdEps;
 	private String strNombre = new String();
 	private Conectar conMiconexion;
-
+//---------------------------------------------------------------------------------
+//Constructores
+//---------------------------------------------------------------------------------
 
 	public Eps(){
 
@@ -32,7 +34,10 @@ public class Eps {
         intIdEps=cIntIdEps;
 	strNombre=cStrNombre;
 	}
-
+//---------------------------------------------------------------------------------
+//Get y Set
+//---------------------------------------------------------------------------------
+        
 	public int getIntIdEps(){
 		return intIdEps;
 	}
@@ -61,6 +66,10 @@ public class Eps {
 	 * 
 	 * @param strCNombreEps
 	 */
+        
+//---------------------------------------------------------------------------------
+//CRUD
+//---------------------------------------------------------------------------------
 	public void crudCrearEps(String strCNombreEps){
 
             conMiconexion = new Conectar();
@@ -152,52 +161,45 @@ public class Eps {
                 JOptionPane.showMessageDialog(null, strMensaje,  "PROBLEMA CON LA LISTA", 0);
                 System.out.print(ex);
                 return null;
-            }
-                
-                
-                
-                
+            }          
 	}
+        
     public static void main(String[] args) {
-       
-        
-        
-		//prueba para la conexi�n
+          
+//prueba para la conexi�n
         Conectar CC = new Conectar();
         String R[][] = CC.resultadoQuery(CC.queryConsulta("SELECT `cod_eps`, `nombre_eps` FROM `ct_epss` WHERE `cod_eps`=1;"));
         System.out.print("\nLa EPS es: " + R[0][0] + " - " + R[0][1] + "\n");
         
-
-    
-		//-------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------
   
-		//Prueba clase Eps
+//Prueba clase Eps
     
         Eps miObjeto = new Eps();
         
-        //...................................................................................
-        //Prueba para modificar una Eps
-       /* miObjeto.crudActualizarEps(1, "Colsanitas");
+ //...................................................................................
+ //Prueba para modificar una Eps
+ /* miObjeto.crudActualizarEps(1, "Colsanitas");
 
         System.out.print("\nLa EPS modificada es: " + miObjeto.getIntIdEps() + " - " + miObjeto.getStrNombre() + "\n");
        
-        //...................................................................................
-        //Prueba crear una Eps
+ //...................................................................................
+ //Prueba crear una Eps
         miObjeto.crudCrearEps("NuevaEPS");
    
         System.out.print("\nLA nueva Eps es: " + miObjeto.getIntIdEps() + " - " + miObjeto.getStrNombre() + "\n\n");
            
         
-         //pueba para mostrar una Eps
+ //pueba para mostrar una Eps
         miObjeto.crudMostrarEps(1);
         System.out.print("\nLa Eps 1 es: " + miObjeto.getIntIdEps() + " - " + miObjeto.getStrNombre() + "\n");*/
-     //-----------------------------------------------------------------------------------------------
-        //se crea el vector para recibir el vector de Eps
+//-----------------------------------------------------------------------------------------------
+//se crea el vector para recibir el vector de Eps
         Eps[] lisTabla = miObjeto.crudListaEps();
         
         System.out.print("\n\t\tLa lista de Eps es: \n" );
         
-        //Bucle para listar los colores del vector
+//Bucle para listar los colores del vector
         for(int intCont=0; intCont < lisTabla.length -1; intCont++)
         {
             System.out.print("\n" + lisTabla[intCont].getIntIdEps()+ " - " + lisTabla[intCont].getStrNombre());
