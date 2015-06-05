@@ -1,18 +1,22 @@
-
+/**
+ * UNIVERSIDAD DE CUNDINAMARCA
+ * Profesor Jorge Páramo Fonseca
+ * HCRadiologia
+ * @author Glo System
+ */
 package HCRadiologia;
 
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Toshiba
- */
+
 public class TipoImagen {
 
         private int intIdTipoImagen;
 	private String strTipoImagen = new String();
 	private Conectar conMiconexion;
-
+//---------------------------------------------------
+//Constructores
+//--------------------------------------------------
 
 	public TipoImagen(){
 
@@ -26,7 +30,9 @@ public class TipoImagen {
 	public TipoImagen(int cIntIdTipoImagen, String cStrTipoImagen){
 
 	}
-
+//---------------------------------------------------
+//Get - Set
+//--------------------------------------------------
 	public int getIntIdTipoImagen(){
 		return intIdTipoImagen;
 	}
@@ -50,7 +56,9 @@ public class TipoImagen {
 	public void setStrTipoImagen(String newVal){
 		strTipoImagen = newVal;
 	}
-
+//---------------------------------------------------
+//CRUD
+//--------------------------------------------------
 	/**
 	 * 
 	 * @param strCTipoImagen
@@ -114,6 +122,10 @@ public class TipoImagen {
 	public Eps[] crudListaTipoImagen(){
 		return null;
 	}
+        
+//---------------------------------------------------
+//Main
+//--------------------------------------------------
     public static void main(String[] args) {
        
         

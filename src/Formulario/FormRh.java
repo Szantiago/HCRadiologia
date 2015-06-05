@@ -1,24 +1,29 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * UNIVERSIDAD DE CUNDINAMARCA
+ * Profesor Jorge Páramo Fonseca
+ * HCRadiologia
+ * @author Glo System
+ * 
  */
 package Formulario;
 
 import HCRadiologia.RH;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Toshiba
- */
+
 public class FormRh extends javax.swing.JFrame {
 RH miRh =new RH();
+
     /**
      * Creates new form FormRh
      */
     public FormRh() {
         initComponents();
+        this.setLocation(300,120);
+        setSize(340,340);
+        setResizable(false);
+        this.getContentPane().setBackground(new Color (47,79,79));
     }
 
     /**
@@ -38,88 +43,91 @@ RH miRh =new RH();
         btnLimpiar = new javax.swing.JButton();
         txtId = new javax.swing.JTextField();
         txtRh = new javax.swing.JTextField();
+        btnVolver = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Tipo de Sangre");
+        getContentPane().setLayout(null);
 
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Id tipo de sangre");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(49, 54, 95, 20);
 
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Tipo de sangre");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(49, 127, 90, 20);
 
         btnBuscar.setText("Buscar");
+        btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnBuscar);
+        btnBuscar.setBounds(49, 187, 79, 23);
 
         btnActualizar.setText("Actualizar");
+        btnActualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActualizarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnActualizar);
+        btnActualizar.setBounds(162, 187, 89, 23);
 
         btnInsertar.setText("Insertar");
+        btnInsertar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnInsertar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnInsertarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnInsertar);
+        btnInsertar.setBounds(49, 228, 79, 23);
 
         btnLimpiar.setText("Limpiar");
+        btnLimpiar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimpiarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnLimpiar);
+        btnLimpiar.setBounds(162, 228, 80, 23);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnBuscar)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnInsertar)
-                                .addGap(40, 40, 40)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnLimpiar)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(btnActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtId))
-                            .addComponent(txtRh, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(75, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(53, 53, 53)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtRh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBuscar)
-                    .addComponent(btnActualizar))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnInsertar)
-                    .addComponent(btnLimpiar))
-                .addContainerGap(49, Short.MAX_VALUE))
-        );
+        txtId.setMargin(new java.awt.Insets(-3, -3, -3, -3));
+        getContentPane().add(txtId);
+        txtId.setBounds(160, 50, 79, 30);
+
+        txtRh.setMargin(new java.awt.Insets(-3, -3, -3, -3));
+        getContentPane().add(txtRh);
+        txtRh.setBounds(162, 122, 163, 30);
+
+        btnVolver.setText("Volver");
+        btnVolver.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnVolver);
+        btnVolver.setBounds(49, 269, 79, 23);
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logomedicina.png"))); // NOI18N
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(40, 0, 280, 300);
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Historia Clinica de Radiologia");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(10, 10, 261, 22);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -127,7 +135,7 @@ RH miRh =new RH();
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         miRh.crudMostrarRh(Integer.parseInt(txtId.getText()));
         txtRh.setText(miRh.getStrNomRh());
-        
+        txtId.setEnabled(false);
         btnInsertar.setEnabled(false);
       ;
     }//GEN-LAST:event_btnBuscarActionPerformed
@@ -148,6 +156,7 @@ RH miRh =new RH();
         
        txtId.setText("");
        txtRh.setText("");
+       txtId.setEnabled(true);
        btnInsertar.setEnabled(true);
        btnBuscar.setEnabled(true);
         
@@ -158,6 +167,12 @@ RH miRh =new RH();
         miRh.crudActualizarRh(Integer.parseInt(txtId.getText()),txtRh.getText());
         txtRh.setText(miRh.getStrNomRh());
     }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        MenuPrincipal menu = new MenuPrincipal();
+        menu.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_btnVolverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -199,8 +214,11 @@ RH miRh =new RH();
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnInsertar;
     private javax.swing.JButton btnLimpiar;
+    private javax.swing.JButton btnVolver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtRh;
     // End of variables declaration//GEN-END:variables

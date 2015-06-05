@@ -4,9 +4,10 @@ package HCRadiologia;
 import javax.swing.JOptionPane;
 
 /**
- * @author Toshiba
- * @version 1.0
- * @created 10-abr-2015 6:54:07 PM
+ * UNIVERSIDAD DE CUNDINAMARCA
+ * Profesor Jorge Páramo Fonseca
+ * HCRadiologia
+ * @author Glo System
  */
 public class TiposDatosContactos {
 
@@ -15,10 +16,6 @@ public class TiposDatosContactos {
 	private Conectar conMiconexion;
 
 
-
-	public void finalize() throws Throwable {
-
-	}
 	public TiposDatosContactos(){
 
 	}
@@ -28,8 +25,9 @@ public class TiposDatosContactos {
 	 * @param cStrTipoDato
 	 * @param cintIdTipoDato
 	 */
-	public TiposDatosContactos(String cStrTipoDato, int cintIdTipoDato){
-
+	public TiposDatosContactos(int cintIdTipoDato, String cStrTipoDato){
+               intIdTipoDato=cintIdTipoDato;
+               strTipoDato= cStrTipoDato;
 	}
 
 	public int getintIdTipoDato(){
@@ -109,7 +107,44 @@ public class TiposDatosContactos {
 	}
 
 	public TiposDatosContactos[] crudListaTipoDato(){
-            return null;
+            int intCont;
+            int intTama =0;
+            conMiconexion = new Conectar();
+            
+            try
+            {
+                String [][]strReg = conMiconexion.resultadoQuery(conMiconexion.queryConsulta( 
+                                                "SELECT COUNT(`id_tipo_dato_contacto`) AS TAL FROM `ct_tipos_datos_contactos`;"));
+
+                intTama = Integer.parseInt(strReg[0][0]);
+                
+                
+                strReg = conMiconexion.resultadoQuery(conMiconexion.queryConsulta(
+                        "SELECT id_tipo_dato_contacto, tipo_dato_contacto  FROM ct_tipos_datos_contactos ORDER BY id_tipo_dato_contacto;"));                
+
+                TiposDatosContactos [] Lista = new TiposDatosContactos[intTama];
+
+                for (intCont = 0; intCont <(intTama); intCont++)
+                {
+                    TiposDatosContactos TipoAux = new TiposDatosContactos( Integer.parseInt(strReg[intCont][0]), 
+                            strReg[intCont][1]);
+                                        
+                    Lista[intCont] = TipoAux;
+
+                }//System.out.print("\n el tamaño es:" + intTama + "\n");
+                return Lista;
+                
+            }
+            catch(Exception ex)
+            {
+                String strMensaje = "Se presento un problema con la lista de Tipo Documento 1";
+                JOptionPane.showMessageDialog(null, strMensaje,  "PROBLEMA CON LA LISTA", 0);
+                System.out.print(ex);
+                return null;
+            }
+  
+		
+	
 	}
         
     public static void main(String[] args) {
@@ -128,22 +163,31 @@ public class TiposDatosContactos {
         TiposDatosContactos miObjeto = new TiposDatosContactos();
         
         //...................................................................................
-        //Prueba para modificar Tipo Dato Contacto
-        miObjeto.crudActualizarTipoDato(1, "Direccion");
-
-        System.out.print("\nEl Tipo de Dato de Contacto modificado es: " + miObjeto.getintIdTipoDato() + " - " + miObjeto.getStrTipoDato() + "\n");
-       
-        //...................................................................................
-        //Prueba crear un Tipo Dato Contacto
-        miObjeto.crudCrearTipoDato("Correo");
-   
-        System.out.print("\nEl nuevo Tipo de Dato de Contacto es: " + miObjeto.getintIdTipoDato() + " - " + miObjeto.getStrTipoDato() + "\n\n");
-           
+//        //Prueba para modificar Tipo Dato Contacto
+//        miObjeto.crudActualizarTipoDato(1, "Direccion");
+//
+//        System.out.print("\nEl Tipo de Dato de Contacto modificado es: " + miObjeto.getintIdTipoDato() + " - " + miObjeto.getStrTipoDato() + "\n");
+//       
+//        //...................................................................................
+//        //Prueba crear un Tipo Dato Contacto
+//        miObjeto.crudCrearTipoDato("Correo");
+//   
+//        System.out.print("\nEl nuevo Tipo de Dato de Contacto es: " + miObjeto.getintIdTipoDato() + " - " + miObjeto.getStrTipoDato() + "\n\n");
+//           
+//        
+//         //pueba para mostrar un Tipo Dato Contacto
+//        miObjeto.crudMostrarTipoDato(1);
+//        System.out.print("\nEl Tipo de Dato de Contacto 1 es: " + miObjeto.getintIdTipoDato() + " - " + miObjeto.getStrTipoDato() + "\n");
+//     
+               TiposDatosContactos[] lisTabla = miObjeto.crudListaTipoDato();
         
-         //pueba para mostrar un Tipo Dato Contacto
-        miObjeto.crudMostrarTipoDato(1);
-        System.out.print("\nEl Tipo de Dato de Contacto 1 es: " + miObjeto.getintIdTipoDato() + " - " + miObjeto.getStrTipoDato() + "\n");
-     
+        System.out.print("\n\t\tLa lista de Eps es: \n" );
+        
+//Bucle para listar del vector
+        for(int intCont=0; intCont < lisTabla.length -1; intCont++)
+        {
+            System.out.print("\n" + lisTabla[intCont].getintIdTipoDato()+ " - " + lisTabla[intCont].getStrTipoDato());
+        }
         
     }
     

@@ -21,13 +21,24 @@ public class TipoDocumento {
 	private Conectar conMiconexion;
 
 
-
+//---------------------------------------------------
+//Constructores
+//--------------------------------------------------
 	
 	public TipoDocumento(){
 
 	}
+        public TipoDocumento( int cIntIdTipo, String cStrInicialesDoc, String cStrTipoDoc){
+	
+            intIdTipo=cIntIdTipo;
+            strInicialesDoc=cStrInicialesDoc;
+            strTipDoc=cStrTipoDoc;
+            
+	}
         
-        
+//---------------------------------------------------
+//Get - Set
+//--------------------------------------------------      
 	public int getIntIdTipo(){
 		return intIdTipo;
 	}
@@ -51,20 +62,10 @@ public class TipoDocumento {
         public void setStrCInicialesTipoDoc(String newVal){
 		strInicialesDoc = newVal;
 	}
-        
-	/**
-	 * 
-	 * @param cStrTipoDoc
-	 * @param cIntIdTipo
-	 */
-	public TipoDocumento( int cIntIdTipo, String cStrInicialesDoc, String cStrTipoDoc){
 	
-            intIdTipo=cIntIdTipo;
-            strInicialesDoc=cStrInicialesDoc;
-            strTipDoc=cStrTipoDoc;
-            
-	}
-
+//---------------------------------------------------
+//CRUD
+//--------------------------------------------------
 	/**
 	 * 
 	 * @param StrCTipoDoc
@@ -167,7 +168,9 @@ public class TipoDocumento {
   
 		
 	}
-
+//---------------------------------------------------
+//Main
+//--------------------------------------------------
 /**
 	 * 
 	 * @param args

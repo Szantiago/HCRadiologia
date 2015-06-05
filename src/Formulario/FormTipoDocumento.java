@@ -16,14 +16,18 @@ import javax.swing.JOptionPane;
 
 public class FormTipoDocumento extends javax.swing.JFrame {
 TipoDocumento mitipDoc = new TipoDocumento();
+ TipoDocumento[] miLista =mitipDoc.crudListaTipoDocumento();
+ boolean b;
 //---------------------------------------------------------------------------------
 //Constructor
 //---------------------------------------------------------------------------------
     public FormTipoDocumento() {
         initComponents();
         this.setLocation(300,120);
-        this.getContentPane().setBackground(new Color (153,153,255));
-        TipoDocumento[] miLista = mitipDoc.crudListaTipoDocumento();             
+        setSize(380,310);
+        setResizable(false);
+        this.getContentPane().setBackground(new Color (47,79,79));
+        b=true;           
         for(int intCont = 0; intCont < miLista.length; intCont++){
         jComboDoc.addItem(miLista[intCont].getIntIdTipo()+ "-"+miLista[intCont].getStrCInicialesTipoDoc()+"-"+miLista[intCont].getstrTipDoc());
         }
@@ -38,31 +42,43 @@ TipoDocumento mitipDoc = new TipoDocumento();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        btnBuscar = new javax.swing.JButton();
-        txtBuscar = new javax.swing.JTextField();
         txtIniciales = new javax.swing.JTextField();
         txtTipDoc = new javax.swing.JTextField();
         btnClear = new javax.swing.JButton();
         btnInsert = new javax.swing.JButton();
         jComboDoc = new javax.swing.JComboBox();
         btnActualizar = new javax.swing.JButton();
+        btnVolver = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tipo de Documento");
         setBackground(new java.awt.Color(204, 204, 204));
+        getContentPane().setLayout(null);
 
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Buscar");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(40, 80, 49, 20);
 
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Iniciales");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(40, 120, 60, 20);
 
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Tipo documento");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(40, 150, 100, 20);
 
-        btnBuscar.setText("Buscar");
-        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarActionPerformed(evt);
-            }
-        });
+        txtIniciales.setMargin(new java.awt.Insets(-3, -3, -3, -3));
+        getContentPane().add(txtIniciales);
+        txtIniciales.setBounds(150, 120, 43, 20);
+
+        txtTipDoc.setMargin(new java.awt.Insets(-3, -3, -3, -3));
+        getContentPane().add(txtTipDoc);
+        txtTipDoc.setBounds(150, 150, 194, 20);
 
         btnClear.setText("Limpiar");
         btnClear.addActionListener(new java.awt.event.ActionListener() {
@@ -70,6 +86,8 @@ TipoDocumento mitipDoc = new TipoDocumento();
                 btnClearActionPerformed(evt);
             }
         });
+        getContentPane().add(btnClear);
+        btnClear.setBounds(35, 210, 70, 23);
 
         btnInsert.setText("Insertar");
         btnInsert.addActionListener(new java.awt.event.ActionListener() {
@@ -77,12 +95,16 @@ TipoDocumento mitipDoc = new TipoDocumento();
                 btnInsertActionPerformed(evt);
             }
         });
+        getContentPane().add(btnInsert);
+        btnInsert.setBounds(110, 210, 80, 23);
 
         jComboDoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboDocActionPerformed(evt);
             }
         });
+        getContentPane().add(jComboDoc);
+        jComboDoc.setBounds(130, 80, 113, 20);
 
         btnActualizar.setText("Actualizar");
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -90,104 +112,49 @@ TipoDocumento mitipDoc = new TipoDocumento();
                 btnActualizarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnActualizar);
+        btnActualizar.setBounds(200, 210, 90, 23);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnBuscar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnClear)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnInsert)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnActualizar)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addGap(22, 22, 22)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtTipDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(93, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtIniciales, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(19, 217, Short.MAX_VALUE))))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jComboDoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(118, 118, 118))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel2)
-                        .addGap(23, 23, 23))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jComboDoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(9, 9, 9)
-                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtIniciales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtTipDoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBuscar)
-                    .addComponent(btnClear)
-                    .addComponent(btnInsert)
-                    .addComponent(btnActualizar))
-                .addGap(45, 45, 45))
-        );
+        btnVolver.setText("Volver");
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnVolver);
+        btnVolver.setBounds(293, 210, 80, 23);
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Historia Clinica de Radiologia");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(37, 23, 310, 32);
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logomedicina.png"))); // NOI18N
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(70, 0, 270, 260);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-//---------------------------------------------------------------------------------
-//Boton buscar
-//---------------------------------------------------------------------------------
-    
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        
-        mitipDoc.crudMostrarTipoDocumento(Integer.parseInt(txtBuscar.getText()));
-        txtIniciales.setText(mitipDoc.getStrCInicialesTipoDoc());
-        txtTipDoc.setText(mitipDoc.getstrTipDoc());
-        btnInsert.setEnabled(false); 
-    }//GEN-LAST:event_btnBuscarActionPerformed
 
 //---------------------------------------------------------------------------------
 //Boton limpiar
 //---------------------------------------------------------------------------------    
     
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
-       txtBuscar.setText("");
+       b=false;
+       
        txtIniciales.setText("");
        txtTipDoc.setText("");
        jComboDoc.removeAllItems();
        btnInsert.setEnabled(true);
-       btnBuscar.setEnabled(true);
        jComboDoc.repaint();
-       TipoDocumento[] miLista = mitipDoc.crudListaTipoDocumento();             
+                    
         for(int intCont = 0; intCont < miLista.length; intCont++){
         jComboDoc.addItem(miLista[intCont].getIntIdTipo()+ "-"+miLista[intCont].getStrCInicialesTipoDoc()+"-"+miLista[intCont].getstrTipDoc());
        }
+        jComboDoc.setSelectedIndex(0);
+        b=true;
     }//GEN-LAST:event_btnClearActionPerformed
 
 //---------------------------------------------------------------------------------
@@ -195,14 +162,13 @@ TipoDocumento mitipDoc = new TipoDocumento();
 //---------------------------------------------------------------------------------    
     
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
-       mitipDoc.crudCrearTipoDocumento(txtTipDoc.getText(),txtIniciales.getText());
-       txtBuscar.setText("");
+       mitipDoc.crudCrearTipoDocumento(txtTipDoc.getText(),txtIniciales.getText());       
        txtIniciales.setText("");
        txtTipDoc.setText("");
        JOptionPane.showMessageDialog(null, "Se creo el registro", "Crecion de color",2);//Mensaje de exito (dato 2)
-       
-       btnBuscar.setEnabled(false); 
-
+       MenuPrincipal menu = new MenuPrincipal();
+       menu.setVisible(true);
+       setVisible(false);
     }//GEN-LAST:event_btnInsertActionPerformed
 
 //---------------------------------------------------------------------------------
@@ -210,6 +176,12 @@ TipoDocumento mitipDoc = new TipoDocumento();
 //---------------------------------------------------------------------------------    
     
     private void jComboDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboDocActionPerformed
+        if(b){
+        mitipDoc = miLista[jComboDoc.getSelectedIndex()];
+        
+        txtIniciales.setText(mitipDoc.getStrCInicialesTipoDoc());
+        txtTipDoc.setText(mitipDoc.getstrTipDoc()); 
+
         TipoDocumento mD = new TipoDocumento();
         TipoDocumento[] lD = mD.crudListaTipoDocumento();
         mD=lD[jComboDoc.getSelectedIndex()];
@@ -217,9 +189,10 @@ TipoDocumento mitipDoc = new TipoDocumento();
         String varInD=mD.getStrCInicialesTipoDoc();
         String varD = mD.getstrTipDoc();
       
-        txtBuscar.setText(""+varId);
         txtIniciales.setText(varInD);
         txtTipDoc.setText(varD);
+        btnInsert.setEnabled(false);
+        }
     }//GEN-LAST:event_jComboDocActionPerformed
 
 //---------------------------------------------------------------------------------
@@ -227,11 +200,23 @@ TipoDocumento mitipDoc = new TipoDocumento();
 //---------------------------------------------------------------------------------    
     
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        mitipDoc.crudActualizarTipoDocumento(Integer.parseInt(txtBuscar.getText()),txtIniciales.getText(),txtTipDoc.getText());
+        int t= jComboDoc.getSelectedIndex();
+        t= mitipDoc.getIntIdTipo();
+        mitipDoc.crudActualizarTipoDocumento(t,txtIniciales.getText(),txtTipDoc.getText());
         txtIniciales.setText(mitipDoc.getStrCInicialesTipoDoc());
         txtTipDoc.setText(mitipDoc.getstrTipDoc());
         
     }//GEN-LAST:event_btnActualizarActionPerformed
+
+//--------------------------------------------------------------------------------------------
+//Boton Volver
+//--------------------------------------------------------------------------------------------
+    
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        MenuPrincipal menu = new MenuPrincipal();
+        menu.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_btnVolverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -271,14 +256,15 @@ TipoDocumento mitipDoc = new TipoDocumento();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
-    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnInsert;
+    private javax.swing.JButton btnVolver;
     private javax.swing.JComboBox jComboDoc;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField txtBuscar;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField txtIniciales;
     private javax.swing.JTextField txtTipDoc;
     // End of variables declaration//GEN-END:variables

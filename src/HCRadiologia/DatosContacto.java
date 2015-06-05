@@ -24,14 +24,25 @@ public class DatosContacto {
 	private short shPrioridadDatoContacto;
         private byte byteVigenciaDatoContacto;
         private Conectar conMiconexion;
-    
+
+//---------------------------------------------------
+//Constructores
+//--------------------------------------------------
 public DatosContacto(){
             
 	}
 public DatosContacto(int cIntIdDatoContacto){
             
 	}
-
+public DatosContacto( int cIntIdDatoContacto, int cIntEpsDatoContacto, String cStrDatoContacto){
+            intIdDatoContacto=cIntIdDatoContacto;
+            intEpsDatoContacto=cIntEpsDatoContacto;
+            strDatoContacto=cStrDatoContacto;
+            
+	}
+//---------------------------------------------------
+//Get - Set
+//--------------------------------------------------
 public int getIntIdDatoContacto(){
 		return intIdDatoContacto ;
 	}
@@ -78,7 +89,9 @@ public byte getByteVigenciaDatoContacto(){
 public void setByteVigenciaDatoContacto(byte newVal){
 		byteVigenciaDatoContacto = newVal;
 	}
-
+//---------------------------------------------------
+//CRUD
+//--------------------------------------------------
 	public void crudCrearDatosPersona(int intCPersonaDatoContacto, String strCDatoContacto, int intCTipoDatoContacto, int shCPrioridadDatoContacto, int byteCVigenciaDatoContacto){
         
             conMiconexion = new Conectar();
@@ -168,7 +181,47 @@ public void setByteVigenciaDatoContacto(byte newVal){
 
 	   }
             
+        } 
+           public DatosContacto[] crudListaDatosContactoEps(int cIdEps){
+            int intCont;
+            int intTama =0;
+            conMiconexion = new Conectar();
+            
+            try
+            {
+                String [][]strReg = conMiconexion.resultadoQuery(conMiconexion.queryConsulta( 
+                                                "SELECT COUNT(`eps_dato_contacto`) AS TAL FROM `tb_datos_contacto` WHERE `eps_dato_contacto` = "+cIdEps+";"));
+
+                intTama = Integer.parseInt(strReg[0][0]);
+                
+                
+                strReg = conMiconexion.resultadoQuery(conMiconexion.queryConsulta(
+                        "SELECT `id_dato_contacto`,`eps_dato_contacto`,`dato_contacto` FROM `tb_datos_contacto` WHERE `eps_dato_contacto` =" + cIdEps+" ORDER BY id_dato_contacto ;"));                
+
+                DatosContacto [] Lista = new DatosContacto[intTama];
+
+                for (intCont = 0; intCont <(intTama); intCont++)
+                {
+                    DatosContacto TipAux = new DatosContacto( Integer.parseInt(strReg[intCont][0]), 
+                            Integer.parseInt(strReg[intCont][1]),strReg[intCont][2]);
+                                        
+                    Lista[intCont] = TipAux;
+
+                }//System.out.print("\n el tamaño es:" + intTama + "\n");
+                return Lista;
+                
+            }
+            catch(Exception ex)
+            {
+                String strMensaje = "Se presento un problema con la lista de Tipo Documento 1";
+                JOptionPane.showMessageDialog(null, strMensaje,  "PROBLEMA CON LA LISTA", 0);
+                System.out.print(ex);
+                return null;
+            }	
 	}
+//---------------------------------------------------
+//Main
+//--------------------------------------------------
     public static void main(String[] args) {
         
             //prueba para la conexi�n
@@ -185,18 +238,28 @@ public void setByteVigenciaDatoContacto(byte newVal){
      
         //Prueba para modificar
 
-        miObjeto.crudActualizarDatosContactoPersona(2,1,"564556",1,1,1);
-        System.out.print("\n Registro modificado es: " + miObjeto.getIntIdDatoContacto() +" - "+ miObjeto.getIntPersonaDatoContacto() + " - " + miObjeto.getStrDatoContacto() +" - " +  miObjeto.getIntTipoDatoContacto() +" - " + miObjeto.getShPrioridadDatoContacto() +" - " + miObjeto.getByteVigenciaDatoContacto() + "\n");
-        
-        miObjeto.crudActualizarDatosContactoEps(3,1,"56094322",1,1,1);
-        System.out.print("\n Registro modificado es: " + miObjeto.getIntIdDatoContacto() + " - " + miObjeto.getIntEpsDatoContacto() + " - " + miObjeto.getStrDatoContacto() +" - " +  miObjeto.getIntTipoDatoContacto() +" - " + miObjeto.getShPrioridadDatoContacto() +" - " + miObjeto.getByteVigenciaDatoContacto() + "\n");
-     
+//        miObjeto.crudActualizarDatosContactoPersona(2,1,"564556",1,1,1);
+//        System.out.print("\n Registro modificado es: " + miObjeto.getIntIdDatoContacto() +" - "+ miObjeto.getIntPersonaDatoContacto() + " - " + miObjeto.getStrDatoContacto() +" - " +  miObjeto.getIntTipoDatoContacto() +" - " + miObjeto.getShPrioridadDatoContacto() +" - " + miObjeto.getByteVigenciaDatoContacto() + "\n");
+//        
+//        miObjeto.crudActualizarDatosContactoEps(3,1,"56094322",1,1,1);
+//        System.out.print("\n Registro modificado es: " + miObjeto.getIntIdDatoContacto() + " - " + miObjeto.getIntEpsDatoContacto() + " - " + miObjeto.getStrDatoContacto() +" - " +  miObjeto.getIntTipoDatoContacto() +" - " + miObjeto.getShPrioridadDatoContacto() +" - " + miObjeto.getByteVigenciaDatoContacto() + "\n");
+//     
         
         
 // Crear DatosContacto
        // miObjeto.crudCrearDatosPersona(2,"676455",1,1,1 ); 
         //miObjeto.crudCrearDatosEps(2,"456354",1,1,1); 
         
+     DatosContacto[] lisTabla = miObjeto.crudListaDatosContactoEps(1);
+        
+        System.out.print("\n\t\tLa lista de datos es: \n" );
+        
+        //Bucle para listar los colores del vector
+        for(int intCont=0; intCont < lisTabla.length; intCont++)
+        {
+            System.out.print("\n" + lisTabla[intCont].getIntIdDatoContacto()+" - "+lisTabla[intCont].getIntEpsDatoContacto()+" - "+lisTabla[intCont].getStrDatoContacto());
+        }
+     
     }
     
 }

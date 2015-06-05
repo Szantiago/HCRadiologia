@@ -179,10 +179,10 @@ public class Eps {
         
  //...................................................................................
  //Prueba para modificar una Eps
- /* miObjeto.crudActualizarEps(1, "Colsanitas");
+  miObjeto.crudActualizarEps(2, "New Eps");
 
         System.out.print("\nLa EPS modificada es: " + miObjeto.getIntIdEps() + " - " + miObjeto.getStrNombre() + "\n");
-       
+  /*     
  //...................................................................................
  //Prueba crear una Eps
         miObjeto.crudCrearEps("NuevaEPS");
@@ -199,8 +199,8 @@ public class Eps {
         
         System.out.print("\n\t\tLa lista de Eps es: \n" );
         
-//Bucle para listar los colores del vector
-        for(int intCont=0; intCont < lisTabla.length -1; intCont++)
+//Bucle para listar las Epss del vector
+        for(int intCont=0; intCont < lisTabla.length; intCont++)
         {
             System.out.print("\n" + lisTabla[intCont].getIntIdEps()+ " - " + lisTabla[intCont].getStrNombre());
         }

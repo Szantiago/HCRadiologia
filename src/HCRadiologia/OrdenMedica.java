@@ -24,12 +24,16 @@ public class OrdenMedica {
     private String strFechaOrdenMedica = new String();
     private String strObservacionesOrden = new String();
     private Conectar conMiconexion;
-    
+//---------------------------------------------------
+//Constructores
+//-------------------------------------------------- 
         public OrdenMedica (){
         }
         public OrdenMedica (int cIntIdOrdenMedica){
         }
-
+//---------------------------------------------------
+//Get - Set
+//--------------------------------------------------
         public int getIntIdOrdenMedica(){
 		return intIdOrdenMedica;
 	}
@@ -62,7 +66,9 @@ public class OrdenMedica {
 		strObservacionesOrden = newVal;
 	}
         
-        
+//---------------------------------------------------
+//CRUD
+//--------------------------------------------------        
         public void crudCrearOrdenMedica(int intCIdOrdenMedica, int intCMedicoOrdenMedica, int intCPacienteOrdenMedica, String strCFechaOrdenMedica, String strCObservacionesOrden){
 
             conMiconexion = new Conectar();
@@ -113,6 +119,9 @@ public class OrdenMedica {
              strObservacionesOrden = strReg[0][4];
     
 	}
+//---------------------------------------------------
+//Main
+//--------------------------------------------------
     public static void main(String[] args) {
 
         //prueba para la conexi�n

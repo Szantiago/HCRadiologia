@@ -16,18 +16,23 @@ import javax.swing.JOptionPane;
 
 public class FormEps extends javax.swing.JFrame {
 Eps miEps =new Eps();
+ Eps[] miLista =miEps.crudListaEps();//array de marcas
+ boolean b;
 
 //---------------------------------------------------------------------------------
 //Constructor
 //---------------------------------------------------------------------------------
     public FormEps() {
         initComponents();
-        this.setLocation(300,120);
-        this.getContentPane().setBackground(new Color (153,153,255));
-        //Eps[] miLista =miEps.crudListaEps();
-        //for(int cont=0; cont < miLista.length; cont++ ){
-        //jComboeps.addItem(miLista[cont].getIntIdEps()+" - "+miLista[cont].getStrNombre());
-        //}
+        this.setLocation(320,140);
+        setSize(320,300);
+        setResizable(false);
+        this.getContentPane().setBackground(new Color (47,79,79));
+        b=true;
+        Eps[] miLista =miEps.crudListaEps();           
+        for(int cont=0; cont < miLista.length; cont++ ){
+        jComboEps.addItem(miLista[cont].getIntIdEps()+" - "+miLista[cont].getStrNombre());
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -35,29 +40,35 @@ Eps miEps =new Eps();
     private void initComponents() {
 
         jTextField1 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        btnBuscar = new javax.swing.JButton();
         btnInsertar = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
-        txtId = new javax.swing.JTextField();
         txtEps = new javax.swing.JTextField();
         btnActualizar = new javax.swing.JButton();
+        btnVolver = new javax.swing.JButton();
+        jComboEps = new javax.swing.JComboBox();
+        jLabel4 = new javax.swing.JLabel();
+        btnDatosEps = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         jTextField1.setText("jTextField1");
 
+        jButton1.setText("Actualizar datos Eps");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(null);
 
+        jLabel1.setForeground(new java.awt.Color(224, 255, 255));
         jLabel1.setText("Código");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(20, 70, 50, 14);
 
+        jLabel2.setForeground(new java.awt.Color(224, 255, 255));
         jLabel2.setText("Eps");
-
-        btnBuscar.setText("Buscar");
-        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarActionPerformed(evt);
-            }
-        });
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(20, 100, 40, 14);
 
         btnInsertar.setText("Insertar");
         btnInsertar.addActionListener(new java.awt.event.ActionListener() {
@@ -65,6 +76,8 @@ Eps miEps =new Eps();
                 btnInsertarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnInsertar);
+        btnInsertar.setBounds(40, 150, 80, 23);
 
         btnClear.setText("Limpiar");
         btnClear.addActionListener(new java.awt.event.ActionListener() {
@@ -72,6 +85,12 @@ Eps miEps =new Eps();
                 btnClearActionPerformed(evt);
             }
         });
+        getContentPane().add(btnClear);
+        btnClear.setBounds(170, 150, 90, 23);
+
+        txtEps.setMargin(new java.awt.Insets(-3, -3, -3, -3));
+        getContentPane().add(txtEps);
+        txtEps.setBounds(90, 100, 170, 30);
 
         btnActualizar.setText("Actualizar");
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -79,82 +98,59 @@ Eps miEps =new Eps();
                 btnActualizarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnActualizar);
+        btnActualizar.setBounds(170, 190, 90, 23);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnInsertar)
-                            .addComponent(btnBuscar))
-                        .addGap(50, 50, 50)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnActualizar)
-                            .addComponent(btnClear)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtEps, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtEps, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnBuscar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnInsertar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnClear)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnActualizar)))
-                .addContainerGap(35, Short.MAX_VALUE))
-        );
+        btnVolver.setText("Volver");
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnVolver);
+        btnVolver.setBounds(40, 190, 80, 23);
+
+        jComboEps.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboEpsActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jComboEps);
+        jComboEps.setBounds(90, 60, 140, 30);
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Historia Clinica de Radiologia");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(0, 0, 310, 30);
+
+        btnDatosEps.setText("Ingresar datosde contacto de  Eps");
+        btnDatosEps.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDatosEpsActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnDatosEps);
+        btnDatosEps.setBounds(30, 230, 220, 23);
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logomedicina.png"))); // NOI18N
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(20, 0, 260, 250);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-//---------------------------------------------------------------------------------
-//Boton Buscar
-//---------------------------------------------------------------------------------
-    
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        miEps.crudMostrarEps(Integer.parseInt(txtId.getText()));
-        txtEps.setText(miEps.getStrNombre());
-        
-        btnInsertar.setEnabled(false);
-    }//GEN-LAST:event_btnBuscarActionPerformed
 
 //---------------------------------------------------------------------------------
 //Boton insertar
 //---------------------------------------------------------------------------------    
     private void btnInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarActionPerformed
        miEps.crudCrearEps(txtEps.getText());
-       txtId.setText("");
        txtEps.setText("");
        
        JOptionPane.showMessageDialog(null, "Se creo el registro", "Crecion de color",2);//Mensaje de exito (dato 2)
-       
-       btnBuscar.setEnabled(false); 
-
+       MenuPrincipal menu = new MenuPrincipal();
+       menu.setVisible(true);
+       setVisible(false);
     }//GEN-LAST:event_btnInsertarActionPerformed
 
 //---------------------------------------------------------------------------------
@@ -162,15 +158,17 @@ Eps miEps =new Eps();
 //---------------------------------------------------------------------------------    
     
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
-       txtId.setText("");
+       b=false;
        txtEps.setText("");
        btnInsertar.setEnabled(true);
-       btnBuscar.setEnabled(true);
-//       jComboeps.removeAllItems();
-//       Eps[] miLista =miEps.crudListaEps();
-//        for(int cont=0; cont < miLista.length; cont++ ){
-//        jComboeps.addItem(miLista[cont].getIntIdEps()+miLista[cont].getStrNombre());
-//        }
+       jComboEps.removeAllItems();
+       jComboEps.repaint();
+       
+        for(int cont=0; cont < miLista.length; cont++ ){
+        jComboEps.addItem(miLista[cont].getIntIdEps()+miLista[cont].getStrNombre());
+        }
+        jComboEps.setSelectedIndex(0);
+        b=true;
     }//GEN-LAST:event_btnClearActionPerformed
 
 //---------------------------------------------------------------------------------
@@ -179,10 +177,50 @@ Eps miEps =new Eps();
     
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
 
-        miEps.crudActualizarEps(Integer.parseInt(txtId.getText()),txtEps.getText());
+        int t= jComboEps.getSelectedIndex();
+        t= miEps.getIntIdEps();
+        
+        miEps.crudActualizarEps(t,txtEps.getText());
         txtEps.setText(miEps.getStrNombre());
+        btnActualizar.setEnabled(false);
+        btnInsertar.setEnabled(false);
         
     }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        MenuPrincipal menu = new MenuPrincipal();
+        menu.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_btnVolverActionPerformed
+
+    private void jComboEpsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboEpsActionPerformed
+         if(b){
+        miEps = miLista[jComboEps.getSelectedIndex()];
+        
+        
+        txtEps.setText(miEps.getStrNombre()); 
+
+        Eps mD = new Eps();
+        Eps[] lD = mD.crudListaEps();
+        mD=lD[jComboEps.getSelectedIndex()];
+        int varId=mD.getIntIdEps();
+        String varInD=mD.getStrNombre();
+        
+        txtEps.setText(varInD);
+        btnActualizar.setEnabled(true);
+        btnInsertar.setEnabled(false);
+        }
+    }//GEN-LAST:event_jComboEpsActionPerformed
+
+    private void btnDatosEpsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDatosEpsActionPerformed
+        FormDatosContactoEps dat = new FormDatosContactoEps();
+        dat.txtIdEps.setText(jComboEps.getSelectedItem().toString());
+        dat.txtEpsD.setText(""+Integer.parseInt(""+(jComboEps.getSelectedIndex()+1)));
+        dat.txtIdEps.setEditable(false);
+        dat.txtEpsD.setVisible(false);
+        dat.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_btnDatosEpsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -218,16 +256,19 @@ Eps miEps =new Eps();
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
-    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnClear;
+    private javax.swing.JButton btnDatosEps;
     private javax.swing.JButton btnInsertar;
+    private javax.swing.JButton btnVolver;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox jComboEps;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField txtEps;
-    private javax.swing.JTextField txtId;
     // End of variables declaration//GEN-END:variables
 }

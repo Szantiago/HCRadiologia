@@ -25,7 +25,9 @@ public class Imagen {
 	private int intTipoDiagnostico;
 	private int intTipoImagen;
 
-
+//---------------------------------------------------
+//Constructores
+//--------------------------------------------------
 	public Imagen(){
 
 	}
@@ -44,6 +46,9 @@ public class Imagen {
 
 	}
 
+//---------------------------------------------------
+//Get - Set
+//--------------------------------------------------
 	public int getIntIdImagen(){
 		return intIdImagen;
 	}
@@ -130,6 +135,10 @@ public class Imagen {
 	 * @param strCFechaImagen
 	 * @param strCImagen
 	 */
+        
+//---------------------------------------------------
+//CRUD
+//--------------------------------------------------
 	public void crudCrearImagen(int intCTipoImagen, int intCTipoDiagnostico, String strCDiagnostico, int intCOrdenMedica, String strCFechaImagen, String strCImagen){
 
             conMiconexion = new Conectar();
@@ -203,7 +212,9 @@ public class Imagen {
 		return null;
 	}
         
-        
+  //---------------------------------------------------
+//Main
+//--------------------------------------------------      
 	public static void main(String[] args){
 
             //prueba para la conexi�n

@@ -31,18 +31,33 @@ public class Persona {
         private String strEspecialidadMedicaPersona;
         private String strObservacionesPersona;
 	private Conectar conMiconexion;
-
+//---------------------------------------------------
+//Constructores
+//--------------------------------------------------
 	public Persona(){
             
 	}
 
 	
-	public Persona(int cIntCodPer, String cStrNumDoc, String cStrPNom, String cStrSNom, String cStrPApe, String cStrSApe, String cStrFecNac){
-
-           
+	public Persona(int cIntCodPer, int cIntTipoDocumento, String cStrNumDoc, String cStrPNom, String cStrSNom, String cStrPApe, String cStrSApe, String cStrFecNac, int cIntEps, int cIntRH, String cStrObservacionesPersona ){
+            intCodPer=cIntCodPer;
+            strNumDoc=cStrNumDoc;
+            strPNom=cStrPNom;
+            strSNom=cStrSNom;
+            strPApe=cStrPApe;
+            strSApe=cStrSApe;
+            strFecNac=cStrFecNac;
+            intEps=cIntEps;
+            intTipoDocumento=cIntTipoDocumento;
+            intRH=cIntRH;
+            strObservacionesPersona=cStrObservacionesPersona;
+            
 	}
 //--------------------------------------------------------------------------------------------------------------------------------------------------
-	public int getIntCodPer(){
+//---------------------------------------------------
+//Get - Set
+//--------------------------------------------------
+        public int getIntCodPer(){
 		return intCodPer;
 	}
 
@@ -217,7 +232,9 @@ public class Persona {
 	public void setStrEspecialidadMedicaPersona(String newVal){
 		strEspecialidadMedicaPersona = newVal;
 	}
-        
+//---------------------------------------------------
+//CRUD
+//--------------------------------------------------        
 	
 	public void crudCrearPersona(int intCTipoDocPer, String strCNumDoc, String strCPNom, String strCSNom, String strCPApe,String strCSApe, int intCGenero, int intCMedicoPersona, String strCFechaNac, int intCRh, int intCEpsPer, String strCObservacionesPersona){
         
@@ -351,7 +368,44 @@ public class Persona {
                JOptionPane.showMessageDialog(null, strMensaje,  "MODIFICAR ", 0);
 
 	   }
-            
+        }
+        
+	public Persona[] crudListaPersona(){
+		
+            int intCont;
+            int intTama = 0;
+            conMiconexion = new Conectar();
+
+            try
+            {
+                String [][]strReg = conMiconexion.resultadoQuery(conMiconexion.queryConsulta( 
+                                                "SELECT count(`cod_persona`)AS TAL FROM `tb_personas` ;"));
+
+                intTama = Integer.parseInt(strReg[0][0]);
+                //System.out.print("\n el tamaño es:" + intTama + "\n");
+                
+                strReg = conMiconexion.resultadoQuery(conMiconexion.queryConsulta(
+                        "SELECT `cod_persona`,`tip_doc_persona`,`num_doc_persona`,`prim_nombre_persona`,`seg_nombre_persona`,`prim_apellido_persona`,`seg_apellido_persona`,`fech_nacimiento_persona`,`rh_persona`,`eps_persona`,`observaciones_persona` FROM `tb_personas` ORDER BY cod_persona ;"));                
+
+                Persona [] Lista = new Persona[intTama];
+
+                for (intCont = 0; intCont <(intTama); intCont++)
+                {
+                    Persona PerAux = new Persona( Integer.parseInt(strReg[intCont][0]), 
+                            Integer.parseInt(strReg[intCont][1]), strReg[intCont][2], strReg[intCont][3], strReg[intCont][4], strReg[intCont][5], strReg[intCont][6], strReg[intCont][7],  Integer.parseInt(strReg[intCont][8]) , Integer.parseInt(strReg[intCont][9]), strReg[intCont][10]);
+                                        
+                    Lista[intCont] = PerAux;
+
+                }
+                return Lista;
+            }
+            catch(Exception ex)
+            {
+                String strMensaje = "Se presento un problema con la lista 1";
+                JOptionPane.showMessageDialog(null, strMensaje,  "PROBLEMA CON LA LISTA", 0);
+                System.out.print(ex);
+                return null;
+            }          
 	}
         
         
@@ -389,15 +443,25 @@ public class Persona {
             //Prueba crear
        
         
-        //miObjeto.crudCrearMedico(1,"45563","Jacinto","Cenovio","Lopez","Garcia",0,0,"","766566",1,1,"");
-        miObjeto.crudCrearPersona(1,"65456788","Maria","","Jimenes","",0,1,"1366571",1,1,"");  
+//        //miObjeto.crudCrearMedico(1,"45563","Jacinto","Cenovio","Lopez","Garcia",0,0,"","766566",1,1,"");
+//        miObjeto.crudCrearPersona(1,"65456788","Maria","","Jimenes","",0,1,"1366571",1,1,"");  
+//        
+//        miObjeto.crudMostrarPersona(2);
+//        System.out.print("\n-Registro: " + miObjeto.getIntCodPer() +" - "+ miObjeto.getIntTipoDocumento() + " - " + miObjeto.getStrNumDoc() + " - " + miObjeto.getStrPNom() +" - " +  miObjeto.getStrSNom() +" - " + miObjeto.getStrPApe() +" - " + miObjeto.getStrSApe() + " - " + miObjeto.getStrFecNac() +" - " + miObjeto.getIntRH() + " - " + miObjeto.getIntEps()+ " - " + miObjeto.getStrObservacionesPersona() + "\n");
+//     
+//        miObjeto.crudMostrarPersona(5);
+//        System.out.print("\n-Registro: " + miObjeto.getIntCodPer() +" - "+ miObjeto.getIntTipoDocumento() + " - " + miObjeto.getStrNumDoc() + " - " + miObjeto.getStrPNom() +" - " +  miObjeto.getStrSNom() +" - " + miObjeto.getStrPApe() +" - " + miObjeto.getStrSApe() + " - " + miObjeto.getStrFecNac() +" - " + miObjeto.getIntRH() + " - " + miObjeto.getIntEps()+ " - " + miObjeto.getStrObservacionesPersona() + "\n");
+//     
         
-        miObjeto.crudMostrarPersona(2);
-        System.out.print("\n-Registro: " + miObjeto.getIntCodPer() +" - "+ miObjeto.getIntTipoDocumento() + " - " + miObjeto.getStrNumDoc() + " - " + miObjeto.getStrPNom() +" - " +  miObjeto.getStrSNom() +" - " + miObjeto.getStrPApe() +" - " + miObjeto.getStrSApe() + " - " + miObjeto.getStrFecNac() +" - " + miObjeto.getIntRH() + " - " + miObjeto.getIntEps()+ " - " + miObjeto.getStrObservacionesPersona() + "\n");
-     
-        miObjeto.crudMostrarPersona(5);
-        System.out.print("\n-Registro: " + miObjeto.getIntCodPer() +" - "+ miObjeto.getIntTipoDocumento() + " - " + miObjeto.getStrNumDoc() + " - " + miObjeto.getStrPNom() +" - " +  miObjeto.getStrSNom() +" - " + miObjeto.getStrPApe() +" - " + miObjeto.getStrSApe() + " - " + miObjeto.getStrFecNac() +" - " + miObjeto.getIntRH() + " - " + miObjeto.getIntEps()+ " - " + miObjeto.getStrObservacionesPersona() + "\n");
-     
+        Persona[] lisTabla = miObjeto.crudListaPersona();
+        
+        System.out.print("\n\t\tLa lista es: \n" );
+        
+//Bucle para listar del vector
+        for(int intCont=0; intCont < lisTabla.length -1 ; intCont++)
+        {
+            System.out.print("\n" + lisTabla[intCont].getIntCodPer()+ " - " + lisTabla[intCont].getStrNumDoc()+ " - " + lisTabla[intCont].getStrPNom());
+        }
     }        
 
         
