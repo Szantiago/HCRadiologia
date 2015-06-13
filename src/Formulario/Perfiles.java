@@ -107,8 +107,14 @@ public class Perfiles extends javax.swing.JFrame {
     }else if(jComboPerfil.getSelectedItem().toString()=="Empleado")
     {
         MenuPrincipal menu = new MenuPrincipal();
+        menu.setSize(350,220);
         menu.setVisible(true);
         setVisible(false);
+        menu.btnTiposSangre.setVisible(false);
+        menu.btnTiposDoc.setVisible(false);
+        menu.btnTiposDatosContactos.setVisible(false);
+        menu.btnTipoImg.setVisible(false);
+        menu.btnEps.setVisible(false);
     }
     }//GEN-LAST:event_jComboPerfilActionPerformed
 

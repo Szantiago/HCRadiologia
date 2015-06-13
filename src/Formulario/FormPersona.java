@@ -420,10 +420,11 @@ public class FormPersona extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboEpsActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+   
         int t= jComboId.getSelectedIndex();
         t= miPer.getIntCodPer();
         
-        miPer.crudActualizarPersona(t, Integer.parseInt(txtTipD.getText()),txtNumDoc.getText(),txtPNom.getText(),txtSNom.getText(),txtPApe.getText(),txtSApe.getText(),Integer.parseInt(txtGenero.getText()),Integer.parseInt(txtMedPer.getText()),txtFNac.getText(),Integer.parseInt(txtSangre.getText()), Integer.parseInt(txtEps.getText()),txtObs.getText());
+        miPer.crudActualizarMedico(t, Integer.parseInt(txtTipD.getText()),txtNumDoc.getText(),txtPNom.getText(),txtSNom.getText(),txtPApe.getText(),txtSApe.getText(),Integer.parseInt(txtGenero.getText()),Integer.parseInt(txtMedPer.getText()),txtEspecialidad.getText(),txtFNac.getText(),Integer.parseInt(txtSangre.getText()), Integer.parseInt(txtEps.getText()),txtObs.getText());
         txtTipD.setText(""+miPer.getIntTipoDocumento());
         txtNumDoc.setText(miPer.getStrNumDoc());
         txtPNom.setText(miPer.getStrPNom());
@@ -431,17 +432,21 @@ public class FormPersona extends javax.swing.JFrame {
         txtPApe.setText(miPer.getStrPApe());
         txtSApe.setText(miPer.getStrSApe());
         txtMedPer.setText(""+miPer.getbyteMedicoPersona());
+        txtEspecialidad.setText(miPer.getStrEspecialidadMedicaPersona());
         txtGenero.setText(""+miPer.getByteGenero());
         txtFNac.setText(miPer.getStrFecNac());
         txtSangre.setText(""+miPer.getIntRH());
         txtEps.setText(""+miPer.getIntEps());
         txtObs.setText(miPer.getStrObservacionesPersona());
-        
-        
+         
+       JOptionPane.showMessageDialog(null, "Se creo el registro", "Crecion de color",2);//Mensaje de exito (dato 2)
+       MenuPrincipal menu = new MenuPrincipal();
+       menu.setVisible(true);
+       setVisible(false);
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
-        
+      
         miPer.crudCrearPersona(Integer.parseInt(txtTipD.getText()),txtNumDoc.getText(),txtPNom.getText(),txtSNom.getText(),txtPApe.getText(),txtSApe.getText(),Integer.parseInt(txtGenero.getText()),Integer.parseInt(txtMedPer.getText()),txtFNac.getText(),Integer.parseInt(txtSangre.getText()), Integer.parseInt(txtEps.getText()),txtObs.getText());
         txtTipD.setText("");
         txtNumDoc.setText("");
@@ -455,7 +460,7 @@ public class FormPersona extends javax.swing.JFrame {
         txtSangre.setText("");
         txtEps.setText("");
         txtObs.setText("");
-      
+    
        JOptionPane.showMessageDialog(null, "Se creo el registro", "Crecion de color",2);//Mensaje de exito (dato 2)
        MenuPrincipal menu = new MenuPrincipal();
        menu.setVisible(true);
@@ -463,7 +468,29 @@ public class FormPersona extends javax.swing.JFrame {
     }//GEN-LAST:event_btnInsertActionPerformed
 
     private void BtnCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCleanActionPerformed
-        // TODO add your handling code here:
+        b=false;
+       
+       txtTipD.setText("");
+        txtNumDoc.setText("");
+        txtPNom.setText("");
+        txtSNom.setText("");
+        txtPApe.setText("");
+        txtSApe.setText("");
+        txtMedPer.setText("");
+        txtGenero.setText("");
+        txtFNac.setText("");
+        txtSangre.setText("");
+        txtEps.setText("");
+        txtObs.setText("");
+       jComboId.removeAllItems();
+       btnInsert.setEnabled(true);
+       jComboId.repaint();
+                    
+        for(int intCont = 0; intCont < miLista1.length; intCont++){
+        jComboId.addItem(miLista1[intCont].getIntCodPer()+ "-"+miLista1[intCont].getStrNumDoc()+"-"+miLista1[intCont].getStrPNom());
+        }
+        jComboId.setSelectedIndex(0);
+        b=true;
     }//GEN-LAST:event_BtnCleanActionPerformed
 
     /**
